@@ -1,0 +1,35 @@
+{% include 'encabezado.html' %}
+<div class="container mt-4 col-md-6">
+    <h2 class="text-center text-warning">EDITAR PRODUCTO</h2>
+    <form action="/actualizar" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="idProducto" value="{{ producto['_id'] }}">
+        
+        <div class="mb-3">
+            <label>Código:</label>
+            <input type="number" name="txtCodigo" class="form-control" value="{{ producto['codigo'] }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label>Nombre:</label>
+            <input type="text" name="txtNombre" class="form-control" value="{{ producto['nombre'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Precio:</label>
+            <input type="number" name="txtPrecio" class="form-control" value="{{ producto['precio'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Categoría:</label>
+            <select name="cbCategoria" class="form-select">
+                <option value="ELECTRODOMESTICO" {% if producto['categoria'] == 'ELECTRODOMESTICO' %}selected{% endif %}>ELECTRODOMESTICO</option>
+                <option value="ROPA" {% if producto['categoria'] == 'ROPA' %}selected{% endif %}>ROPA</option>
+                <option value="CALZADO" {% if producto['categoria'] == 'CALZADO' %}selected{% endif %}>CALZADO</option>
+            </select>
+        </div>
+        <div class="mb-3 text-center">
+            <img src="/static/imagenes/{{ producto['_id'] }}.jpg" width="100" class="img-thumbnail mb-2">
+            <input type="file" name="fileFoto" class="form-control" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-warning">Editar</button>
+        <a href="/" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% include 'piePagina.html' %}

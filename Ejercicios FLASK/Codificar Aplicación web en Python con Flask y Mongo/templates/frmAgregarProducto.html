@@ -1,0 +1,36 @@
+{% include 'encabezado.html' %}
+<div class="container mt-4 col-md-6">
+    <h2 class="text-center text-primary">AGREGAR PRODUCTO</h2>
+    {% if mensaje %}
+        <div class="alert alert-warning">{{ mensaje }}</div>
+    {% endif %}
+    <form action="/agregarProducto" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label>Código:</label>
+            <input type="number" name="txtCodigo" class="form-control" value="{{ producto.codigo if producto else '' }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Nombre:</label>
+            <input type="text" name="txtNombre" class="form-control" value="{{ producto.nombre if producto else '' }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Precio:</label>
+            <input type="number" name="txtPrecio" class="form-control" value="{{ producto.precio if producto else '' }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Categoría:</label>
+            <select name="cbCategoria" class="form-select" required>
+                <option value="ELECTRODOMESTICO">ELECTRODOMESTICO</option>
+                <option value="ROPA">ROPA</option>
+                <option value="CALZADO">CALZADO</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Seleccione Foto (jpg):</label>
+            <input type="file" name="fileFoto" class="form-control" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="/" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% include 'piePagina.html' %}

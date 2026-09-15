@@ -1,0 +1,38 @@
+{% include 'encabezado.html' %}
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-4">GESTIÓN PRODUCTOS</h2>
+    <a href="/frmAgregarProducto" class="btn btn-success mb-3">Agregar Producto</a>
+    
+    <table class="table table-bordered align-middle">
+        <thead class="bg-danger text-white text-center">
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+                <th>Foto</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in listaProductos %}
+            <tr>
+                <td class="text-center">{{ producto["codigo"] }}</td>
+                <td>{{ producto["nombre"] }}</td>
+                <td>${{ producto["precio"] }}</td>
+                <td>{{ producto["categoria"] }}</td>
+                <td class="text-center">
+                    <img src="/static/imagenes/{{ producto['_id'] }}.jpg" width="50" height="50" class="rounded">
+                </td>
+                <td class="text-center">
+                    <a href="/consultar/{{ producto['_id'] }}" class="me-2">
+                        <i class="fa fa-edit text-warning fs-4" title="Editar"></i>
+                    </a>
+                    <i onclick="abrirModalEliminar('{{ producto['_id'] }}')" class="fa fa-trash text-danger fs-4" title="Eliminar" style="cursor:pointer;"></i>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include 'piePagina.html' %}
